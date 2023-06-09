@@ -17,7 +17,7 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this funciton will add one
 '''
-db_drop_and_create_all()
+# db_drop_and_create_all()
 
 # ROUTES
 '''
@@ -95,7 +95,7 @@ def add_drink(payload):
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the updated drink
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drinks/,id>', methods=['PATCH'])
+@app.route('/drinks/<id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
 def update_drink(payload, id):
     body = request.get_json()
@@ -212,3 +212,11 @@ def invalid_request(error):
         "error": 400,
         "message": "invalid request"
     }), 400
+
+@app.errorhandler(403)
+def forbidden(error):
+    return jsonify({
+        "success": False,
+        "error": 403,
+        "message": "Forbidden error"
+    }), 403

@@ -3,11 +3,13 @@ from flask import request, _request_ctx_stack
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+from dotenv import dotenv_values
 
+config = dotenv_values("../.env")
 
-AUTH0_DOMAIN = 'dev-g30o00804fpc8bgb.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'dev'
+AUTH0_DOMAIN = config["AUTH0_DOMAIN"]
+ALGORITHMS = config["ALGORITHMS"]
+API_AUDIENCE = config["API_AUDIENCE"]
 
 ## AuthError Exception
 '''
@@ -152,7 +154,7 @@ def verify_decode_jwt(token):
     raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
-            }, 400)
+            }, 403)
 
 
 '''
