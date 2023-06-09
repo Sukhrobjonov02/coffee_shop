@@ -1,4 +1,4 @@
-backend/.whocares/
+backend/whocares/
 .vscode/
 __pycache__/
 test.db
