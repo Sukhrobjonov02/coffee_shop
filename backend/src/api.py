@@ -212,11 +212,3 @@ def invalid_request(error):
         "error": 400,
         "message": "invalid request"
     }), 400
-
-@app.errorhandler(403)
-def forbidden(error):
-    return jsonify({
-        "success": False,
-        "error": 403,
-        "message": "Forbidden error"
-    }), 403
